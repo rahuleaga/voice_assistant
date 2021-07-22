@@ -25,13 +25,13 @@ engine = pyttsx3.init('sapi5')
 voice = engine.getProperty('voices')
 engine.setProperty('voice', voice[1].id)
 
-
+##functions
 def speak(audio):
     engine.say(audio)
     engine.runAndWait()
 
 
-speak('this is friday')
+speak('hello, I am your voice assistant')
 
 
 def time():
@@ -58,7 +58,7 @@ def wishme():
     else:
         speak('Good Night')
 
-    speak('Friday at your service! How can I help you')
+    speak('Your assitant at your service! How can I help you')
 
 
 def takeCommand():
@@ -87,8 +87,8 @@ def sendEmail(to, content):
     server.starttls()
      
     # Enable low security in gmail
-    server.login('rahul1316154@gmail.com', 'iloveyouvedanti')
-    server.sendmail('rahul1316154@gmail.com', to, content)
+    server.login('youremail@gmail.com', 'yourpassword')
+    server.sendmail('youremail@gmail.com', to, content)
     server.close()
 
 def cpu():
@@ -101,6 +101,7 @@ def cpu():
     speak(battery.percent)
 
 def username():
+    uname = "Rahul"
     speak("What should i call you sir")
     uname = takeCommand()
     speak("hello mister" + uname)
@@ -113,6 +114,7 @@ def username():
     speak("How can i Help you, Sir")
 
 
+    ##main
 if __name__ == "__main__":
     clear = lambda: os.system('cls')
      
@@ -152,11 +154,10 @@ if __name__ == "__main__":
                 print(e)
                 speak("I am unable to send the mail")
 
-        elif 'search in web' in query or 'searching web' in query:
+        elif 'search in web' in query or 'searching web' in query or 'search web' in query:
             speak('What should I search')
-            path = "C:\Program Files\Mozilla Firefox\firefox.exe %s"
             search = takeCommand().lower()
-            webbrowser.get('C:\Program Files\Mozilla Firefox\firefox.exe').open(search + ".com")
+            webbrowser.open_new_tab("https://www.google.com/search?client=firefox-b-d&q=" + search)
         
         
         elif 'open google' in query:
@@ -305,9 +306,10 @@ if __name__ == "__main__":
 
         ## some cool conversations
         elif 'joke' in query:
-            speak(pyjokes.get_jokes())
+            speak(pyjokes.get_jokes(language="en",category=
+            "all"))
         
-        elif "hi there" in query:
+        elif 'hi' in query:
             wishme()
 
 
@@ -337,11 +339,13 @@ if __name__ == "__main__":
             speak("It's good to know that your fine")
         
         elif "i love you" in query:
-            speak("Aww thank you but It's hard to understand")
+            speak("Awwwwwwwwwwwww. thank you but It's hard to understand")
         
         elif "will you be my gf" in query or "will you be my bf" in query:  
             speak("I'm not sure about, may be you should give me some time")
         
+        elif 'i wanna die' in query:
+            speak("We must be survive. We are survivours")
 
         ##date and time including quitting functionss
         elif 'time' in query:
@@ -350,8 +354,15 @@ if __name__ == "__main__":
         elif 'date' in query:
             date()
 
-        elif 'offline'  in query or 'sign out' in query or 'quit' in query or 'gofland' in query:
+        
+        elif 'offline'  in query or 'sign out' in query or 'quit' in query :
             quit()
         
         else:
-            quit()
+            speak("unable to get it, so googling it")
+           
+            webbrowser.open_new_tab("https://www.google.com/search?client=firefox-b-d&q=" + query)
+
+
+
+
